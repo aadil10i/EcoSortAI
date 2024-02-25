@@ -1,8 +1,6 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
-import EditScreenInfo from '../../components/edit-screen-info';
-
-import { Alert, AlertDescription, AlertTitle } from '~/components/alert';
+import { Alert, AlertDescription, AlertTitle } from '~/components/Alert';
 
 export default function AlertTab() {
   return (
@@ -19,7 +17,6 @@ export default function AlertTab() {
           High voltage. Do not touch. Risk of electric shock. Keep away from children.
         </AlertDescription>
       </Alert>
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
   );
 }
