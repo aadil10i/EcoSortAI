@@ -49,6 +49,9 @@ dependencies:
   nativewind:
     specifier: ^4.0.1
     version: 4.0.36(@babel/core@7.23.9)(react-native-reanimated@3.7.1)(react-native-safe-area-context@4.9.0)(react-native-svg@14.1.0)(react-native@0.73.4)(react@18.2.0)(tailwindcss@3.4.1)
+  phosphor-react-native:
+    specifier: ^2.0.0
+    version: 2.0.0(react-native-svg@14.1.0)(react-native@0.73.4)(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -2217,6 +2220,10 @@ packages:
     dependencies:
       mkdirp: 1.0.4
       rimraf: 3.0.2
+    dev: false
+
+  /@phosphor-icons/core@2.0.8:
+    resolution: {integrity: sha512-I9MdTtqjqZDXwo6bbG5lRWZUJMWgXc70hZAVG1OVNVmb6j7039slVXLDH4VEok3U3h1Yhotxe8G5l4sPHJBDzQ==}
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -7540,6 +7547,20 @@ packages:
   /path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+
+  /phosphor-react-native@2.0.0(react-native-svg@14.1.0)(react-native@0.73.4)(react@18.2.0):
+    resolution: {integrity: sha512-Q1WtmdFKq5w0rJAZMvYDzUBAHzL1s41Rc3cn3uTutQcLAo81Vjv/X2Im0bxET7is+70R4WDCPf+ZQEoOhaC5Vw==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-svg: '*'
+    dependencies:
+      '@phosphor-icons/core': 2.0.8
+      caniuse-lite: 1.0.30001588
+      react: 18.2.0
+      react-native: 0.73.4(@babel/core@7.23.9)(@babel/preset-env@7.23.9)(react@18.2.0)
+      react-native-svg: 14.1.0(react-native@0.73.4)(react@18.2.0)
+    dev: false
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
