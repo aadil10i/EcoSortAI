@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import SignOut from '~/components/SignOut';
 export default function AccountTab() {

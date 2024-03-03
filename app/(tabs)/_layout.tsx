@@ -1,7 +1,5 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { Trash, UserCircle, Bell, MapPinLine } from 'phosphor-react-native';
-import { Pressable, StyleSheet } from 'react-native';
 
 export default function TabLayout() {
   return (
@@ -14,20 +12,6 @@ export default function TabLayout() {
         options={{
           title: 'Bin Status',
           tabBarIcon: ({ color }) => <Trash size={28} color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color="gray"
-                    style={[styles.headerRight, { opacity: pressed ? 0.5 : 1 }]}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
         }}
       />
       <Tabs.Screen
@@ -54,12 +38,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  headerRight: {
-    marginRight: 15,
-  },
-  tabBarIcon: {
-    marginBottom: -3,
-  },
-});

@@ -1,9 +1,12 @@
 import { Text, View } from 'react-native';
 
+import BinStatus from '~/components/BinStatus';
+import { Button } from '~/components/Button';
+
 export default function HomeTab() {
   return (
     <View className={styles.container}>
-      <Text className={styles.title}>Tab One</Text>
+      <BinStatus />
       <View className={styles.separator} />
     </View>
   );
