@@ -1,4 +1,4 @@
-import { Link, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 import { Trash, UserCircle, Bell, MapPinLine } from 'phosphor-react-native';
 
 export default function TabLayout() {

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 
 import { supabase } from '~/utils/supabase';
-import type { SupabaseClient } from '@supabase/supabase-js';
 
 export default function HomeScreen() {
   const [binStatus, setBinStatus] = useState('Checking bin status...');
@@ -24,17 +23,29 @@ export default function HomeScreen() {
 
     checkBinStatus();
 
-    const subscription = supabase
-      .from('bin_status')
-      .on('UPDATE', (payload) => {
-        console.log('Bin status updated:', payload);
-        setBinStatus(payload.new.is_full ? 'Bin full' : 'Bin not full');
-      })
+    // Create a function to handle inserts
+    const handleInserts = (payload: any) => {
+      console.log('Change received!', payload);
+      setBinStatus(payload.new.is_full ? 'Bin full' : 'Bin not full');
+    };
+
+    // Handle inserts
+    supabase
+      .channel('bin_status')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'bin_status' },
+        handleInserts
+      )
       .subscribe();
 
-    return () => {
-      supabase.removeSubscription(subscription);
-    };
+    // const subscription = supabase
+    //   .from('bin_status')
+    //   .on('UPDATE', (payload) => {
+    //     console.log('Bin status updated:', payload);
+    //     setBinStatus(payload.new.is_full ? 'Bin full' : 'Bin not full');
+    //   })
+    //   .subscribe();
   }, []);
 
   return (
