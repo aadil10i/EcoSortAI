@@ -34,18 +34,10 @@ export default function HomeScreen() {
       .channel('bin_status')
       .on(
         'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'bin_status' },
+        { event: 'UPDATE', schema: 'public', table: 'bin_status' },
         handleInserts
       )
       .subscribe();
-
-    // const subscription = supabase
-    //   .from('bin_status')
-    //   .on('UPDATE', (payload) => {
-    //     console.log('Bin status updated:', payload);
-    //     setBinStatus(payload.new.is_full ? 'Bin full' : 'Bin not full');
-    //   })
-    //   .subscribe();
   }, []);
 
   return (
