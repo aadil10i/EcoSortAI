@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { useEffect, useState } from 'react';
 
 import { supabase } from '~/utils/supabase';
 
-export default function HomeScreen() {
-  const [binStatus, setBinStatus] = useState('Checking bin status...');
+export const useBinStatus = () => {
+  const [binStatus, setBinStatus] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const checkBinStatus = async () => {
+    const fetchBinStatus = async () => {
       const { data, error } = await supabase.from('bin_status').select('is_full').maybeSingle();
 
       if (error) {
         console.error('Error fetching bin status:', error);
-        setBinStatus('Error checking bin status');
         return;
       }
 
       if (data) {
-        setBinStatus(data.is_full ? 'Bin full' : 'Bin not full');
+        setBinStatus(data.is_full);
       }
     };
 
-    checkBinStatus();
+    fetchBinStatus();
 
-    // Create a function to handle inserts
-    const handleInserts = (payload: any) => {
-      console.log('Change received!', payload);
-      setBinStatus(payload.new.is_full ? 'Bin full' : 'Bin not full');
-    };
-
-    // Handle inserts
-    supabase
+    // Subscribe to table updates
+    const subscription = supabase
       .channel('bin_status')
       .on(
         'postgres_changes',
         { event: 'UPDATE', schema: 'public', table: 'bin_status' },
-        handleInserts
+        (payload) => setBinStatus(payload.new.is_full)
       )
       .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
   }, []);
 
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 24 }}>{binStatus}</Text>
-    </View>
-  );
-}
+  return binStatus;
+};

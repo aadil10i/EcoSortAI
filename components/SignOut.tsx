@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { supabase } from '~/utils/supabase';

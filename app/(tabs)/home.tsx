@@ -1,19 +1,16 @@
-import { Text, View } from 'react-native';
+import React from 'react';
+import { View, Text } from 'react-native';
 
-import BinStatus from '~/components/BinStatus';
-import { Button } from '~/components/Button';
+import { useBinStatus } from '~/components/BinStatus';
 
-export default function HomeTab() {
+export default function HomeScreen() {
+  const binStatus = useBinStatus();
+
   return (
-    <View className="flex items-center justify-center">
-      <View className="ring ring-green-500">
-        <BinStatus />
-      </View>
-      <View className={styles.separator} />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: 24 }}>
+        {binStatus === null ? 'Checking bin status...' : binStatus ? 'Bin full' : 'Bin not full'}
+      </Text>
     </View>
   );
 }
-
-const styles = {
-  separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
-};
