@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { supabase } from '~/utils/supabase';
+import { supabase } from '~/lib/supabase';
 
 export const useBinStatus = () => {
   const [binStatus, setBinStatus] = useState<boolean | null>(null);
