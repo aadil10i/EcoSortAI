@@ -4,9 +4,9 @@
   "scripts": {
     "android": "expo start --android",
     "format": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix && prettier \"**/*.{js,jsx,ts,tsx,json}\" --write",
-    "ios": "expo start --ios",
+    "ios": "expo start -c --ios",
     "start": "expo start",
-    "web": "expo start --web"
+    "web": "expo start -c --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",

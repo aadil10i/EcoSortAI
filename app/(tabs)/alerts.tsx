@@ -5,22 +5,27 @@ import { View, Alert as RNAlert } from 'react-native';
 import { Alert, AlertDescription, AlertTitle } from '~/components/Alert';
 import { useBinStatus } from '~/components/BinStatus';
 import { Button } from '~/components/Button';
-import { P, H2 } from '~/components/typography';
+import { P } from '~/components/typography';
+
+export const orderNo = 'ORD001';
+export const type = 'P';
+export const date = '2024-04-20';
+export const address = 'Mall of The Emirates';
 
 export default function AlertTab() {
   const binFull = useBinStatus();
 
   const handleYesPress = async () => {
     try {
-      const response = await axios.post(
+      const createOrderResponse = await axios.post(
         'https://api.optimoroute.com/v1/create_order?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M',
         {
           operation: 'CREATE',
-          orderNo: 'ORD003',
-          type: 'D',
-          date: '2024-04-30',
+          orderNo,
+          type,
+          date,
           location: {
-            address: 'Dubai Knowledge Park',
+            address,
             acceptPartialMatch: true,
           },
           duration: 20,
@@ -32,11 +37,30 @@ export default function AlertTab() {
         }
       );
 
-      if (response.status === 200) {
-        RNAlert.alert('Your order has been created');
-        console.log('Order created:', response.data);
+      if (createOrderResponse.status === 200) {
+        console.log('Order created:', createOrderResponse.data);
+
+        //Start Planning Routes
+        const startPlanningResponse = await axios.post(
+          'https://api.optimoroute.com/v1/start_planning?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M',
+          {
+            date,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (startPlanningResponse.status === 200) {
+          console.log('Planning started:', startPlanningResponse.data);
+          RNAlert.alert('Your order has been created and planning started');
+        } else {
+          console.error('Error starting planning:', startPlanningResponse.data);
+        }
       } else {
-        console.error('Error creating order:', response.data);
+        console.error('Error creating order:', createOrderResponse.data);
       }
     } catch (error) {
       console.error('Error creating order:', error);
