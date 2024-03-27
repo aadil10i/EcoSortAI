@@ -3,19 +3,28 @@ import { Package } from 'phosphor-react-native';
 import React, { useEffect, useState } from 'react';
 import { View, Alert as RNAlert } from 'react-native';
 
-import { type, date, orderNo } from './alerts';
+import { type, orderNo } from './alerts';
 
 import { Button } from '~/components/Button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '~/components/Card';
 import SignOut from '~/components/SignOut';
 import { P, H1 } from '~/components/typography';
 
+interface Stop {
+  scheduledAtDt: string;
+}
+
 interface Order {
   id: string;
   orderNo: string;
   date: string;
   type: string;
-  routes?: any[];
+  routes?: {
+    distance: number;
+    duration: number;
+    driverName: string;
+    stops: Stop[];
+  }[];
 }
 
 export default function AccountTab() {
@@ -92,10 +101,26 @@ export default function AccountTab() {
       );
 
       if (fetchRoutesResponse.status === 200 && fetchRoutesResponse.data.routes) {
+        const routeData = fetchRoutesResponse.data.routes.map(
+          (route: {
+            distance: any;
+            duration: any;
+            driverName: any;
+            stops: { scheduledAtDt: any }[];
+          }) => ({
+            distance: route.distance,
+            duration: route.duration,
+            driverName: route.driverName,
+            stops: route.stops.map((stop: { scheduledAtDt: any }) => ({
+              scheduledAtDt: stop.scheduledAtDt,
+            })),
+          })
+        );
+
         setOrders((prevOrders) =>
           prevOrders.map((prevOrder) => {
             if (prevOrder.orderNo === order.orderNo) {
-              return { ...prevOrder, routes: fetchRoutesResponse.data.routes };
+              return { ...prevOrder, routes: routeData };
             }
             return prevOrder;
           })
@@ -129,13 +154,16 @@ export default function AccountTab() {
             </View>
             <CardContent className="font-bold pl-8">
               <P>Id No: #{order.id}</P>
-              <P>Date: {date}</P>
               <P>Type: {type}</P>
               {order.routes && order.routes.length > 0 && (
                 <View>
-                  <P>Routes:</P>
                   {order.routes.map((route, index) => (
-                    <View key={index}>{/* Display route information here */}</View>
+                    <View key={index}>
+                      <P>Distance: {route.distance} km</P>
+                      <P>Duration: {route.duration} minutes</P>
+                      <P>Driver Name: {route.driverName}</P>
+                      <P>Date: {route.stops[0].scheduledAtDt}</P>
+                    </View>
                   ))}
                 </View>
               )}
@@ -155,32 +183,3 @@ export default function AccountTab() {
     </View>
   );
 }
-
-// const fetchSchedulingInformation = async (order: Order) => {
-//   try {
-//     const response = await axios.post(
-//       'https://api.optimoroute.com/v1/get_scheduling_info?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M',
-//       {
-//         orderNo: 'ORD001',
-//       },
-//       {
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//       }
-//     );
-//     if (response.status === 200) {
-//       console.log('Successfully fetched scheduling info :', response.data);
-//     } else {
-//       console.error('Error fetching scheduling info :', response.data);
-//     }
-//   } catch (error) {
-//     console.error('Error fetching scheduling info: ', error);
-//   }
-// };
-
-// useEffect(() => {
-//   if (orders.length > 0) {
-//     orders.forEach((order) => fetchSchedulingInformation(order));
-//   }
-// }, [orders]);

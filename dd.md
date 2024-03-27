@@ -2,15 +2,13 @@ LOG Fetching routes successful: {"routes": [{"distance": 15.378, "driverExternal
 
 # get_routes info:
 
-1. routes:
+<!-- 1. routes:
 
    - distance(km);
    - duration(m);
-   - driverName
-
+   - driverName -->
+<!--
      stops:
-
-     - "latitude": 41.8505874,
-     - "longitude": -87.7936685,
+     - "scheduledAtDt" -->
 
 2. routePolyline

@@ -1,19 +1,23 @@
 import axios from 'axios';
 import { AlertTriangle } from 'lucide-react-native';
+import React, { useState } from 'react';
 import { View, Alert as RNAlert } from 'react-native';
 
 import { Alert, AlertDescription, AlertTitle } from '~/components/Alert';
 import { useBinStatus } from '~/components/BinStatus';
 import { Button } from '~/components/Button';
+import { Input } from '~/components/input';
 import { P } from '~/components/typography';
 
 export const orderNo = 'ORD001';
 export const type = 'P';
-export const date = '2024-04-20';
-export const address = 'Mall of The Emirates';
+// export const date = '2024-04-20';
+// export const address = 'Mall of The Emirates';
 
 export default function AlertTab() {
   const binFull = useBinStatus();
+  const [address, setAddress] = useState('');
+  const [date, setDate] = useState('');
 
   const handleYesPress = async () => {
     try {
@@ -38,6 +42,7 @@ export default function AlertTab() {
       );
 
       if (createOrderResponse.status === 200) {
+        // RNAlert.alert('Your order has been created');
         console.log('Order created:', createOrderResponse.data);
 
         //Start Planning Routes
@@ -84,6 +89,14 @@ export default function AlertTab() {
           <AlertDescription>
             Your bin is full, would you like to schedule a pickup order?
           </AlertDescription>
+          <View className="pt-4 flex-col ">
+            <Input placeholder="Please Enter Address" value={address} onChangeText={setAddress} />
+            <Input
+              placeholder="Please Enter Date YYYY-MM-DD format"
+              value={date}
+              onChangeText={setDate}
+            />
+          </View>
           <View className="pt-4">
             <Button variant="outline" size="sm" className="bg-green-500" onPress={handleYesPress}>
               <P>Yes</P>
