@@ -92,7 +92,7 @@ export default function AccountTab() {
   const fetchRoutes = async (order: Order) => {
     try {
       const fetchRoutesResponse = await axios.get(
-        `https://api.optimoroute.com/v1/get_routes?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&date=2024-04-20`,
+        `https://api.optimoroute.com/v1/get_routes?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&date=2024-04-20&includeRoutePolyline=true'`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -140,10 +140,38 @@ export default function AccountTab() {
     }
   }, [orders]);
 
+  // const fetchSchedulingInformation = async (order: Order) => {
+  //   try {
+  //     const fecthSchedulingInfoResponse = await axios.get(
+  //       `https://api.optimoroute.com/v1/get_scheduling_info?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&orderNo=ORD001'`,
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       }
+  //     );
+
+  //     if (fecthSchedulingInfoResponse.status === 200) {
+  //       setOrders((prevOrders) => prevOrders.filter((order) => order.orderNo !== orderNo));
+  //       console.log('Successfully fetcehd scheduling info:', fecthSchedulingInfoResponse.data);
+  //     } else {
+  //       console.error('Error deleting order:', fecthSchedulingInfoResponse.data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error deleting order:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (orders.length > 0) {
+  //     orders.forEach((order) => fetchSchedulingInformation(order));
+  //   }
+  // }, [orders]);
+
   return (
-    <View>
+    <View className="pt-14">
       <H1 className="text-center pt-2">My Orders</H1>
-      <Card className="w-full max-w-lg pl-6">
+      <Card className="w-full max-w-lg pl-6 pt-8">
         {orders.map((order: Order) => (
           <View key={order.id}>
             <View className="flex-row items-center">

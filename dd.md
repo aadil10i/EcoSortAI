@@ -7,8 +7,11 @@ LOG Fetching routes successful: {"routes": [{"distance": 15.378, "driverExternal
    - distance(km);
    - duration(m);
    - driverName -->
-<!--
+
      stops:
-     - "scheduledAtDt" -->
+
+     - "latitude": 41.8505874,
+     - "longitude": -87.7936685,
+     - "scheduledAtDt"
 
 2. routePolyline

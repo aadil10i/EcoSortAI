@@ -5,11 +5,19 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: 'black',
+        tabBarStyle: {
+          borderTopWidth: 0,
+        },
+        tabBarActiveTintColor: 'grey',
+        headerShown: false,
+        tabBarInactiveTintColor: 'black',
       }}>
       <Tabs.Screen
         name="home"
         options={{
+          tabBarStyle: {
+            borderTopWidth: 0,
+          },
           title: 'Bin Status',
           tabBarIcon: ({ color }) => <Trash size={28} color={color} />,
         }}
@@ -18,6 +26,10 @@ export default function TabLayout() {
         name="alerts"
         options={{
           title: 'Alerts',
+          tabBarStyle: {
+            backgroundColor: 'rgba(74,222,128,1)',
+            borderTopWidth: 0,
+          },
           tabBarIcon: ({ color }) => <Bell size={28} color={color} />,
         }}
       />

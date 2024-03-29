@@ -1,16 +1,31 @@
-import { Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import MapView, { Polyline, PROVIDER_GOOGLE } from 'react-native-maps';
+
+const USER_REGION = {
+  latitude: 25.138861,
+  longitude: 55.196671,
+  latitudeDelta: 0.0922,
+  longitudeDelta: 0.0421,
+};
 
 export default function RouteTab() {
   return (
-    <View className={styles.container}>
-      <Text className={styles.title}>Tab One</Text>
-      <View className={styles.separator} />
+    <View className="flex-1">
+      <MapView
+        style={styles.map}
+        showsUserLocation
+        showsMyLocationButton
+        initialRegion={USER_REGION}
+        // provider={PROVIDER_GOOGLE}
+      />
     </View>
   );
 }
 
-const styles = {
-  container: `items-center flex-1 justify-center`,
-  separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
-  title: `text-xl font-bold`,
-};
+const styles = StyleSheet.create({
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+});

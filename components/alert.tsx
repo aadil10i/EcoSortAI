@@ -33,7 +33,7 @@ const Alert = React.forwardRef<
   const { colors } = useTheme();
   return (
     <View ref={ref} role="alert" className={alertVariants({ variant, className })} {...props}>
-      <View className="absolute left-3.5 top-4 -translate-y-0.5">
+      <View className="absolute left-2.5 top-3.5 -translate-y-0.5">
         <Icon
           size={iconSize}
           color={variant === 'destructive' ? colors.notification : colors.text}
@@ -52,7 +52,7 @@ const AlertTitle = React.forwardRef<
   <Text
     ref={ref}
     className={cn(
-      'pl-7 mb-1 font-medium text-xl leading-none tracking-tight text-foreground',
+      'pl-7 mb-1 font-medium text-2xl leading-none tracking-tight text-foreground',
       className
     )}
     {...props}
