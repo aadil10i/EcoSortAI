@@ -169,45 +169,69 @@ export default function AccountTab() {
   // }, [orders]);
 
   return (
-    <View className="pt-14">
-      <H1 className="text-center pt-2">My Orders</H1>
-      <Card className="w-full max-w-lg pl-6 pt-8">
-        {orders.map((order: Order) => (
-          <View key={order.id}>
-            <View className="flex-row items-center">
-              <Package size={28} color="grey" weight="duotone" />
-              <CardHeader>
-                <CardTitle>Order No: #{orderNo}</CardTitle>
-              </CardHeader>
-            </View>
-            <CardContent className="font-bold pl-8">
-              <P>Id No: #{order.id}</P>
-              <P>Type: {type}</P>
-              {order.routes && order.routes.length > 0 && (
-                <View>
-                  {order.routes.map((route, index) => (
-                    <View key={index}>
-                      <P>Distance: {route.distance} km</P>
-                      <P>Duration: {route.duration} minutes</P>
-                      <P>Driver Name: {route.driverName}</P>
-                      <P>Date: {route.stops[0].scheduledAtDt}</P>
-                    </View>
-                  ))}
+    <View className="flex-1">
+      <View className="pt-14 flex-1">
+        <H1 className="text-center pt-2">My Orders</H1>
+        <Card className="w-full max-w-lg pl-6 pt-8">
+          {orders.map((order: Order) => (
+            <View key={order.id}>
+              <View className="flex-row items-center">
+                <View className="box-border  bg-gray-400 rounded-lg border-transparent px-2 py-2  ">
+                  <Package size={28} color="black" weight="regular" />
                 </View>
-              )}
-            </CardContent>
+                <CardHeader>
+                  <CardTitle>Order No: #{orderNo}</CardTitle>
+                </CardHeader>
+              </View>
+              <CardContent className="font-bold pl-20">
+                <View className="flex-row">
+                  <P className="font-semibold">Id No:</P>
+                  <P> #{order.id}</P>
+                </View>
+                <View className="flex-row">
+                  <P className="font-semibold">Type:</P>
+                  <P> {type}</P>
+                </View>
+                {order.routes && order.routes.length > 0 && (
+                  <View>
+                    {order.routes.map((route, index) => (
+                      <View key={index}>
+                        <View className="flex-row">
+                          <P className="font-semibold">Distance: </P>
+                          <P> {route.distance} km</P>
+                        </View>
+                        <View className="flex-row">
+                          <P className="font-semibold">Duration: </P>
+                          <P>{route.duration} minutes</P>
+                        </View>
+                        <View className="flex-row">
+                          <P className="font-semibold">Driver Name: </P>
+                          <P>{route.driverName}</P>
+                        </View>
+                        <View className="flex-row">
+                          <P className="font-semibold">Date: </P>
+                          <P> {route.stops[0].scheduledAtDt}</P>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </CardContent>
 
-            <CardFooter className="pl-8">
-              <Button variant="outline" onPress={() => handleDeletePress(order.orderNo)}>
-                <P>Delete Order</P>
-              </Button>
-            </CardFooter>
-          </View>
-        ))}
-      </Card>
-      <View className="pt-20">
-        <SignOut />
+              <CardFooter className="pl-8">
+                <Button
+                  variant="outline"
+                  className="bg-red-500"
+                  onPress={() => handleDeletePress(order.orderNo)}>
+                  <P className="font-semibold">Delete Orders</P>
+                </Button>
+              </CardFooter>
+              <View className="border-b border-gray-200 my-2 w-96 ml-8" />
+            </View>
+          ))}
+        </Card>
       </View>
+      <SignOut />
     </View>
   );
 }

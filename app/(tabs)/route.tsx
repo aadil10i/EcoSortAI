@@ -12,13 +12,7 @@ const USER_REGION = {
 export default function RouteTab() {
   return (
     <View className="flex-1">
-      <MapView
-        style={styles.map}
-        showsUserLocation
-        showsMyLocationButton
-        initialRegion={USER_REGION}
-        // provider={PROVIDER_GOOGLE}
-      />
+      <MapView style={styles.map} initialRegion={USER_REGION} provider={PROVIDER_GOOGLE} />
     </View>
   );
 }

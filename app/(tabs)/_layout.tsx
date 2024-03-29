@@ -5,9 +5,6 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarStyle: {
-          borderTopWidth: 0,
-        },
         tabBarActiveTintColor: 'grey',
         headerShown: false,
         tabBarInactiveTintColor: 'black',
@@ -15,9 +12,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          tabBarStyle: {
-            borderTopWidth: 0,
-          },
           title: 'Bin Status',
           tabBarIcon: ({ color }) => <Trash size={28} color={color} />,
         }}
