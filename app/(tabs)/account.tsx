@@ -140,34 +140,6 @@ export default function AccountTab() {
     }
   }, [orders]);
 
-  // const fetchSchedulingInformation = async (order: Order) => {
-  //   try {
-  //     const fecthSchedulingInfoResponse = await axios.get(
-  //       `https://api.optimoroute.com/v1/get_scheduling_info?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&orderNo=ORD001'`,
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     );
-
-  //     if (fecthSchedulingInfoResponse.status === 200) {
-  //       setOrders((prevOrders) => prevOrders.filter((order) => order.orderNo !== orderNo));
-  //       console.log('Successfully fetcehd scheduling info:', fecthSchedulingInfoResponse.data);
-  //     } else {
-  //       console.error('Error deleting order:', fecthSchedulingInfoResponse.data);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error deleting order:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (orders.length > 0) {
-  //     orders.forEach((order) => fetchSchedulingInformation(order));
-  //   }
-  // }, [orders]);
-
   return (
     <View className="flex-1">
       <View className="pt-14 flex-1">
@@ -235,3 +207,31 @@ export default function AccountTab() {
     </View>
   );
 }
+
+// const fetchSchedulingInformation = async (order: Order) => {
+//   try {
+//     const fecthSchedulingInfoResponse = await axios.get(
+//       `https://api.optimoroute.com/v1/get_scheduling_info?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&orderNo=ORD001'`,
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//       }
+//     );
+
+//     if (fecthSchedulingInfoResponse.status === 200) {
+//       setOrders((prevOrders) => prevOrders.filter((order) => order.orderNo !== orderNo));
+//       console.log('Successfully fetcehd scheduling info:', fecthSchedulingInfoResponse.data);
+//     } else {
+//       console.error('Error deleting order:', fecthSchedulingInfoResponse.data);
+//     }
+//   } catch (error) {
+//     console.error('Error deleting order:', error);
+//   }
+// };
+
+// useEffect(() => {
+//   if (orders.length > 0) {
+//     orders.forEach((order) => fetchSchedulingInformation(order));
+//   }
+// }, [orders]);
