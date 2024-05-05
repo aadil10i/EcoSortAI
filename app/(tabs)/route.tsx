@@ -19,7 +19,7 @@ export default function RouteTab() {
     const fetchRoutes = async () => {
       try {
         const fetchRoutesResponse = await axios.get(
-          `https://api.optimoroute.com/v1/get_routes?key=5a5b51daac4d57be23754adca44c763aljVXQ5k1x6M&date=2024-04-20&includeRoutePolyline=true`,
+          `https://api.optimoroute.com/v1/get_routes?key=d162e758af77ecaa0e316d0496872fb7c4SNBehUzU&date=2024-05-01&includeRoutePolyline=true`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function RouteTab() {
             coordinates={decodePolyline(routePolyline)}
             strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
             strokeColors={['#7F0000']}
-            strokeWidth={6}
+            strokeWidth={2}
           />
         ) : null}
       </MapView>
