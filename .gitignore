@@ -25,3 +25,5 @@ android
 .metro-health-check*
 
 todo.md
+
+/lib/supabase.ts
